@@ -535,10 +535,12 @@ static void lcd_control_menu()
     MENU_ITEM(submenu, MSG_RETRACT, lcd_control_retract_menu);
 #endif
 #ifdef EEPROM_SETTINGS
+    MENU_ITEM(function, MSG_DEFAULT_EPROM, Config_ResetDefault);
     MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
     MENU_ITEM(function, MSG_LOAD_EPROM, Config_RetrieveSettings);
 #endif
     MENU_ITEM(function, MSG_RESTORE_FAILSAFE, Config_ResetDefault);
+    MENU_ITEM(gcode, MSG_AUTO_CAL, PSTR("G30 A"));  // Auto Cal delta!
     END_MENU();
 }
 

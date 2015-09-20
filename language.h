@@ -104,7 +104,8 @@
 	#define MSG_TEMPERATURE "Temperature"
 	#define MSG_MOTION "Motion"
 	#define MSG_CONTRAST "LCD contrast"
-	#define MSG_STORE_EPROM "Store memory"
+        #define MSG_DEFAULT_EPROM "Reset to defaults"
+        #define MSG_STORE_EPROM "Store memory"
 	#define MSG_LOAD_EPROM "Load memory"
 	#define MSG_RESTORE_FAILSAFE "Restore Failsafe"
 	#define MSG_REFRESH "Refresh"
@@ -131,7 +132,7 @@
 	#define MSG_FILAMENTCHANGE "Change filament"
 	#define MSG_INIT_SDCARD "Init. SD-Card"	
 	#define MSG_CNG_SDCARD "Change SD-Card"
-
+	#define MSG_AUTO_CAL "Auto Calibrate Delta"
 // Serial Console Messages
 
 	#define MSG_Enqueing "enqueing \""
