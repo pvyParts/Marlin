@@ -1620,6 +1620,7 @@ void process_commands()
 
          if (h_endstop - l_endstop > 3)
             {
+            LCD_MESSAGEPGM("Endstop Error");
             SERIAL_ECHOLN("The position of the endstop switches on this printer are not within limits");
             SERIAL_ECHOLN("Adjust endstop switches so that they are within 3mm Z-height of each other");
             SERIAL_ECHOLN("");
@@ -1655,6 +1656,7 @@ void process_commands()
               //Build height is not set correctly .. 
               max_pos[Z_AXIS] -= bed_level_c + 2;
               set_delta_constants();
+              LCD_MESSAGEPGM("Adjusting Z-Height");
               SERIAL_ECHOPAIR("Adjusting Z-Height to: ", max_pos[Z_AXIS]);
               SERIAL_ECHOLN(" mm..");
               } 
@@ -1663,6 +1665,7 @@ void process_commands()
               if ((bed_level_x < -ac_prec) or (bed_level_x > ac_prec) or (bed_level_y < -ac_prec) or (bed_level_y > ac_prec) or (bed_level_z < -ac_prec) or (bed_level_z > ac_prec))
                 {  
                 //Endstops req adjustment
+                LCD_MESSAGEPGM("Adjusting Endstops");
                 SERIAL_ECHOLN("Adjusting Endstops..");
                 endstop_adj[0] += bed_level_x / 1.05;
                 endstop_adj[1] += bed_level_y / 1.05;
@@ -1689,6 +1692,7 @@ void process_commands()
                 }
                 else 
                 {
+                LCD_MESSAGEPGM("Endstops OK");
                 SERIAL_ECHOLN("Endstops: OK");
                  
                 adj_r_target = (bed_level_x + bed_level_y + bed_level_z) / 3;
@@ -1701,7 +1705,8 @@ void process_commands()
                             
                 if ((adj_r_done == false) or (adj_dr_done == false) or (adj_tower_done == false)) 
                   {
-                  //delta geometry adjustment required                     
+                  //delta geometry adjustment required     
+                  LCD_MESSAGEPGM("Adjusting Delta GEO");                
                   SERIAL_ECHOLN("Adjusting Delta Geometry..");
                        
                   //set inital direction and magnitude for delta radius & diagonal rod adjustment
@@ -1723,6 +1728,7 @@ void process_commands()
                      //Apply adjustments 
                      if (adj_r_done == false) 
                        {
+                       LCD_MESSAGEPGM("Adjusting Delta Rad");                
                        SERIAL_ECHOPAIR("Adjusting Delta Radius (",delta_radius);
                        SERIAL_ECHOPAIR(" -> ", delta_radius + adj_r);
                        SERIAL_ECHOLN(")");
@@ -1733,6 +1739,7 @@ void process_commands()
  
                      if (adj_dr_done == false)
                        {
+                       LCD_MESSAGEPGM("Adjusting Delta Rod");                
                        SERIAL_ECHOPAIR("Adjusting Diag Rod Length (",delta_diagonal_rod);
                        SERIAL_ECHOPAIR(" -> ", delta_diagonal_rod + adj_dr);
                        SERIAL_ECHOLN(")");
@@ -1837,6 +1844,7 @@ void process_commands()
                      if ((equalBC == true) and (equalAB == false) and (equalCA == false))
                        {
                        //Tower A radius error .. adjust it
+                       LCD_MESSAGEPGM("TowerA Rad error");                
                        SERIAL_ECHOLN("TowerA Radius error - adjusting");
                        if (adj_RadiusA == 0)
                          {
@@ -1851,6 +1859,7 @@ void process_commands()
                      if ((equalCA == true) and (equalAB == false) and (equalBC == false))
                        {
                        //Tower B radius error .. adjust it
+                       LCD_MESSAGEPGM("TowerB Rad error");                
                        SERIAL_ECHOLN("TowerB Radius error - adjusting");
                        if (adj_RadiusB == 0)
                          {
@@ -1963,7 +1972,7 @@ void process_commands()
                   
 		loopcount ++;    
 		} while(loopcount < iterations);
-
+            LCD_MESSAGEPGM("Delta Geo Done!");                
             SERIAL_ECHOLN("Auto Calibration Complete");
             SERIAL_ECHOLN("Issue M500 Command to save calibration settings to EPROM (if enabled)");
          /*   
@@ -1982,7 +1991,7 @@ void process_commands()
  
         //Restore saved variables
         feedrate = saved_feedrate;
-        feedmultiply = saved_feedmultiply;
+        feedmultiply = saved_feedmultiply; 
         break; 
     case 90: // G90
       relative_mode = false;
