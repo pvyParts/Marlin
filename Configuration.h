@@ -98,13 +98,40 @@
 #define DEFAULT_DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-DELTA_EFFECTOR_OFFSET-DELTA_CARRIAGE_OFFSET)
 
 //Uncomment to enable autocalibration debug messages
-//#define DEBUG_MESSAGES
+#define DEBUG_MESSAGES
 
-// Precision for G30 delta autocalibration function
-#define AUTOCALIBRATION_PRECISION 0.03 // mm
+//Speed for autocalibration travel and probing moves
+#define AUTOCAL_TRAVELRATE 200 // mm/sec
+#define AUTOCAL_PROBERATE 15 // mm/sec
+
+//Amount to lift head after probing a point
+#define AUTOCAL_PROBELIFT 2 // mm
+
+// Precision for G30 delta autocalibration function (calibrate to within +/- this value)
+#define AUTOCALIBRATION_PRECISION 0.05// mm
 
 // Diameter of print bed - this is used to set the distance that autocalibration probes the bed at.
-#define BED_DIAMETER 200 // mm
+#define BED_DIAMETER 190 // mm
+
+//Endstop Offset Adjustment - All values are in mm and must be negative (to move down away from endstop switches) 
+#define TOWER_A_ENDSTOP_ADJ 0 // Front Left Tower
+#define TOWER_B_ENDSTOP_ADJ 0 // Front Right Tower
+#define TOWER_C_ENDSTOP_ADJ 0 // Rear Tower
+
+//Tower Position Adjustment - Adj x Degrees around delta radius (- move clockwise / + move anticlockwise)
+#define TOWER_A_POSITION_ADJ 0 //Front Left Tower
+#define TOWER_B_POSITION_ADJ 0 //Front Right Tower
+#define TOWER_C_POSITION_ADJ 0 //Rear Tower
+
+//Tower Radius Adjustment - Adj x mm in/out from centre of printer (- move in / + move out)
+#define TOWER_A_RADIUS_ADJ 0 //Front Left Tower
+#define TOWER_B_RADIUS_ADJ 0 //Front Right Tower
+#define TOWER_C_RADIUS_ADJ 0 //Rear Tower
+
+//Diagonal Rod Adjustment - Adj diag rod for Tower by x mm from DEFAULT_DELTA_DIAGONAL_ROD value
+#define TOWER_A_DIAGROD_ADJ 0 //Front Left Tower
+#define TOWER_B_DIAGROD_ADJ 0 //Front Right Tower
+#define TOWER_C_DIAGROD_ADJ 0 //Rear Tower
 
 // Z-Probe variables
 // Start and end location values are used to deploy/retract the probe (will move from start to end and back again) 
